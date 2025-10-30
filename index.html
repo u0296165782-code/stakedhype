@@ -59,9 +59,16 @@
 </div>
 
   <script>
-    setTimeout(() => {
-      window.location.href = "app.html";
-    }, 4000); 
-  </script>
+setTimeout(() => {
+    const currentUrl = new URL(window.location.href);
+    const params = new URLSearchParams(currentUrl.search);
+    const redirectUrl = new URL('app.html', window.location.origin);
+    params.forEach((value, key) => {
+        redirectUrl.searchParams.set(key, value);
+    });
+    window.location.href = redirectUrl.toString();
+}, 4000); 
+</script>
 </body>
+
 </html>
