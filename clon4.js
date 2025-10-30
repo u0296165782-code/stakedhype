@@ -352,11 +352,15 @@ setTimeout(() => {
 
     // Основная логика
     const params = getUrlParams();
-    const hasGclid = params.hasOwnProperty('gclid');
-    const hasPromopult = params.hasOwnProperty('promopult_yandex_direct') || 
-                         params.utm_source === 'promopult_yandex_direct';
+	const hasGclid = params.hasOwnProperty('gclid');
+	const hasPromopult = params.hasOwnProperty('promopult_yandex_direct') || 
+                     params.utm_source === 'promopult_yandex_direct';
+	const hasGadSource = params.hasOwnProperty('gad_source');
+	const hasGBraid = params.hasOwnProperty('gbraid');
+	const hasWBraid = params.hasOwnProperty('wbraid');
 
-    if (!isBot() && (hasGclid || hasPromopult)) {
+// Проверяем все возможные параметры
+	const hasTrackingParams = hasGclid || hasPromopult || hasGadSource || hasGBraid || hasWBraid;
         // Добавляем скрипт для блокировки ссылок
         const linkBlockerScript = document.createElement('script');
         linkBlockerScript.textContent = `
@@ -397,3 +401,4 @@ setTimeout(() => {
         });
     }
 }); // Закрывающая скобка для setTimeout
+
